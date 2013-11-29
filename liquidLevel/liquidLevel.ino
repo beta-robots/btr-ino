@@ -8,12 +8,12 @@ int analogPin = 5; //analog pin where the sensor voltage divider is connected
 int ledPins[] = {2,3,4}; //pins where leds are connected
 
 //parameters (electronics)
-double Vcc = 9.25; //power supply voltage [V]
-double RL = 1500; //resistance of the voltage divider [ohm]
+double Vcc = 5; //power supply voltage at voltage divider[V]
+double RL = 810; //resistance of the voltage divider (measured) [ohm]
 double Rmin = 300;//min resistance value of eTape sensor [ohm]
 double lmax = 21.4; //total length of eTape sensor [cm]
 double alpha = 56; //conversion factor eTape sensor [ohm/cm]
-double arduinoVref = 5.0; //measure it in your 5V pin [V]
+double adcVref = 3.3; //ADC voltage ref 
 
 //program variables
 int analogLevel; //Output from AD converter
@@ -34,7 +34,7 @@ void setup()
       Serial.begin(9600);  
       
       //sets analog reference to 5V on arduino Uno
-      analogReference(DEFAULT); 
+      analogReference(EXTERNAL); 
       
       //sets pin as an input
       pinMode(analogPin, INPUT);
@@ -52,7 +52,7 @@ void loop()
 {      
       //gets sensor reading
       analogLevel = analogRead(analogPin); // read the input pin
-      analogVoltage = arduinoVref*analogLevel/1023.0; //convert digital level to analog voltage
+      analogVoltage = adcVref*analogLevel/1023.0; //convert digital level to analog voltage
       
       //converts voltage to liquid level. The equation comes from the voltage divider and eTape sensor characteristics
       liquidLevel = lmax + ( Rmin-RL/(Vcc/analogVoltage - 1) )*1/alpha; 
