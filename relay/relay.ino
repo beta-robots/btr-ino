@@ -1,5 +1,5 @@
 
-// Pin 13 has a LED connected on most Arduino boards.
+// Define the pin where relay coil is connected
 int relayPin = 12;
 
 //setup
