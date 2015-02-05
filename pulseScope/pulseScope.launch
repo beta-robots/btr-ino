@@ -1,0 +1,21 @@
+<!-- Launches rosserial and rqt plot -->
+
+<launch>
+
+    <node 
+        pkg="rosserial_python"
+        type="serial_node.py"
+        name="rosserial_arduino"
+        args="_port:=/dev/ttyACM0"
+        output="screen">
+    </node>
+    
+    <node
+        pkg="rqt_plot" 
+        type="rqt_plot" 
+        name="rqt_plot_a_xyz" 
+        args="/pulse/data">
+    </node>
+    
+</launch>
+
