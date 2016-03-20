@@ -1,4 +1,3 @@
-
 //user parameters
 int nReadings = 10; //indicates how many sensor readings are used to compute a mean.
 boolean verbose = true; //when true, enables displaying debug info through serial port
@@ -31,7 +30,7 @@ int nLedsOn; //how many leds should be on
 void setup() 
 {
       //opens serial port, sets data rate to 9600 bps, Useful for debugging
-      Serial.begin(9600);  
+      Serial.begin(9600); 
       
       //sets analog reference to 5V on arduino Uno
       analogReference(EXTERNAL); 

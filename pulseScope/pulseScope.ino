@@ -30,10 +30,10 @@ void setup()
 }
 
 //Averaging the analog reading to elminate some of the noise
-int averageAnalog(int pin){
-  int v=0;
-  for(int i=0; i<4; i++) v+= analogRead(pin);
-  return v/4;
+float averageAnalog(int pin){
+  int pin_reading = 0;
+  for(int i=0; i<4; i++) pin_reading+= analogRead(pin);
+  return (float)pin_reading/4.0;
 }
 
 //long adc_timer;
@@ -42,8 +42,7 @@ void loop()
 {
 
     //getting input
-    float_msg.data = (float)averageAnalog(0) * 5.0/1023.0; //convert ADC level to volts
-    
+    float_msg.data = averageAnalog(0) * 5.0/1023.0; //convert ADC level to volts
     
     //check pulse and publish if it exists
     if (float_msg.data > 0.05) //greater than 50mV
