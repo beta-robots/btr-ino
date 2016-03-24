@@ -2,9 +2,9 @@
 
 //pin assignement
 int pin_led = 13; // Pin 13 has a LED connected on most Arduino boards.
-int pin_motor_controller_e1 = 2; //pwm
-int pin_motor_controller_m1 = 3; //turn direction
-unsigned long motor_iteration_delta_t = 1000; //duration of each iteration [milliseconds]
+int pin_motor_controller_e1 = 3; //pwm
+int pin_motor_controller_m1 = 2; //turn direction
+unsigned long motor_iteration_delta_t = 200; //duration of each iteration [milliseconds]
 
 //setup
 void setup() 
@@ -59,11 +59,15 @@ void loop()
     digitalWrite(pin_motor_controller_m1, HIGH);   
 
     //ramp-up
-    pwmRamp(pin_motor_controller_e1,50,125,5,motor_iteration_delta_t);
+    pwmRamp(pin_motor_controller_e1,100,200,2,motor_iteration_delta_t);
     
     //ramp-down
-    pwmRamp(pin_motor_controller_e1,125,50,-5,motor_iteration_delta_t);
+    pwmRamp(pin_motor_controller_e1,200,100,-2,motor_iteration_delta_t);
 
+
+    //breathe
+    delay(200);
+    
 //2n cycle
     // turn the LED of
     digitalWrite(pin_led, LOW);   
@@ -72,8 +76,8 @@ void loop()
     digitalWrite(pin_motor_controller_m1, LOW);   
     
     //ramp-up
-    pwmRamp(pin_motor_controller_e1,50,125,5,motor_iteration_delta_t);
+    pwmRamp(pin_motor_controller_e1,100,200,2,motor_iteration_delta_t);
     
     //ramp-down
-    pwmRamp(pin_motor_controller_e1,125,50,-5,motor_iteration_delta_t);
+    pwmRamp(pin_motor_controller_e1,200,100,-2,motor_iteration_delta_t);
 }
