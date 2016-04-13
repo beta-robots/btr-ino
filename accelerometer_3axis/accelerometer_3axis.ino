@@ -68,7 +68,7 @@ void loop()
     z_accel = ((z_volts-z_zerog_volts)/sensitivity_volts_g)*gravity; 
     
     //compute the roll angle
-    //TODO tan(roll) = accel_y / accel_z; 
+    angle_roll = atan2(y_accel,z_accel)*180/3.14159; 
     
     //print results if verbose mode
     if ( verbose )
@@ -79,6 +79,8 @@ void loop()
         Serial.println(y_accel, DEC);
         Serial.print("z_accel: ");
         Serial.println(z_accel, DEC);
+        Serial.print("roll (about x): ");
+        Serial.println(angle_roll, DEC);
         Serial.print("----------------------------\n\n");
     }
 
